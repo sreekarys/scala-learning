@@ -21,4 +21,11 @@ class NonEmptySet(elem: Int, left: IntSet, right: IntSet) extends IntSet {
     else leftResult.union(rightResult)
   }
 
+  def excl(x: Int): IntSet = {
+    if(x == elem)
+      left.union(right)
+    else if (x < elem)
+      new NonEmptySet(elem, left.excl(x), right)
+    else new NonEmptySet(elem, left, right.excl(x))
+  }
 }
